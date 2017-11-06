@@ -18,3 +18,26 @@ html, body {
 #app {
 	height: 100%;
 }
+
+button {
+    cursor: pointer;
+    padding: 5px 10px;
+    min-width: 60px;
+    box-shadow: 0 0 5px rgba(0, 0, 0, 0.5);
+}
+
+.button-primary--light {
+    background: var(--white);
+    border: 1px solid var(--orange);
+    color: var(--grey);
+}
+
+.pad {
+    width: 60px;
+    height: 60px;
+}
+
+.pad--light {
+    background: var(--white);
+    border: 1px solid var(--red);
+}

@@ -23,6 +23,7 @@
     "preact-cli": "^2.0.0"
   },
   "dependencies": {
+    "classnames": "^2.2.5",
     "material-ui": "^0.19.4",
     "preact": "^8.2.1",
     "preact-compat": "^3.17.0",
