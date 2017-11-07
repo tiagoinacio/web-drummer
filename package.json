@@ -5,7 +5,7 @@
   "license": "MIT",
   "scripts": {
     "start": "if-env NODE_ENV=production && npm run -s serve || npm run -s dev",
-    "build": "preact build",
+    "build": "emcc src/wasm/utils.c -s WASM=1 -O3 && preact build",
     "serve": "preact build && preact serve",
     "dev": "preact watch",
     "lint": "eslint src"
@@ -17,6 +17,8 @@
     "build/*"
   ],
   "devDependencies": {
+    "babel-cli": "^6.26.0",
+    "babel-preset-es2015": "^6.24.1",
     "eslint": "^4.5.0",
     "eslint-config-synacor": "^1.1.0",
     "if-env": "^1.0.0",
@@ -24,9 +26,11 @@
   },
   "dependencies": {
     "classnames": "^2.2.5",
+    "ignore-file-loader": "^1.0.0",
     "material-ui": "^0.19.4",
     "preact": "^8.2.1",
     "preact-compat": "^3.17.0",
-    "preact-router": "^2.5.5"
+    "preact-router": "^2.5.5",
+    "wasm-loader": "^1.1.0"
   }
 }
