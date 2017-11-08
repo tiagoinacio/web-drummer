@@ -1,7 +1,7 @@
 import { h, Component } from 'preact';
 import { Link } from 'preact-router/match';
 import classnames from 'classnames';
-import style from './style';
+import style from './style.css';
 
 export default class DrumSynth extends Component {
 

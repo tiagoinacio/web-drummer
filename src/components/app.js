@@ -5,7 +5,7 @@ import Header from './header';
 import Home from '../routes/home';
 import Profile from '../routes/profile';
 import ControlBar from './control-bar';
-import DrumSynth from 'async!../components/drum-synth';
+import DrumSynth from '../components/drum-synth';
 // import Home from 'async!../routes/home';
 // import Profile from 'async!../routes/profile';
 
