@@ -4,9 +4,9 @@
     "version": "0.0.0",
     "license": "MIT",
     "scripts": {
-        "compile": "emcc src/wasm/utils.c -O1 -s WASM=1 -s SIDE_MODULE=1 -o src/wasm/utils.js && cp src/wasm/utils.* build/",
-        "build": "npm run compile && cross-env NODE_ENV=production webpack --progress && cp src/wasm/utils.* build/",
-        "dev": "cross-env NODE_ENV=development webpack-dev-server --inline --hot --progress",
+        "compile": "em++ src/wasm/utils.cpp -O3 -s WASM=1 -s MODULARIZE=1 -Wall -s VERBOSE=1 -o src/wasm/utils.js",
+        "build": "npm run compile && cross-env NODE_ENV=production webpack --progress && cp src/wasm/utils.wasm build/",
+        "dev": "npm run build && cross-env NODE_ENV=development webpack-dev-server --inline --hot --progress",
         "start": "serve build -s -c 1",
         "prestart": "npm run build",
         "prebuild": "mkdirp build && ncp src/assets build/assets",

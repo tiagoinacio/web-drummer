@@ -4,7 +4,6 @@
 	<% for (var chunk in htmlWebpackPlugin.files.css) { %>
 		<link rel="preload" href="<%= htmlWebpackPlugin.files.css[chunk] %>"  as="style">
 	<% } %>
-    <link rel="preload" href="utils.js" as="script">
 	<% for (var chunk in htmlWebpackPlugin.files.chunks) { %>
 		<link rel="preload" href="<%= htmlWebpackPlugin.files.chunks[chunk].entry %>" as="script">
 	<% } %>

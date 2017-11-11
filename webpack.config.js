@@ -12,7 +12,8 @@ const CSS_MAPS = ENV!=='production';
 module.exports = {
 	context: path.resolve(__dirname, "src"),
 	entry: {
-        index: './index.js'
+        // wasm: './wasm/utils.js',
+        bundle: './index.js'
     },
 
 	output: {
@@ -138,43 +139,44 @@ module.exports = {
 		}),
 		new HtmlWebpackPlugin({
 			template: './index.ej',
-			minify: { collapseWhitespace: true }
-		}),
+			minify: { collapseWhitespace: true },
+            chunksSortMode: (a, b) => ['wasm'].indexOf(b.names[0]) - ['wasm'].indexOf(a.names[0])
+        }),
 		new CopyWebpackPlugin([
 			{ from: './manifest.json', to: './' },
 			{ from: './favicon.ico', to: './' }
 		])
 	]).concat(ENV==='production' ? [
-		new webpack.optimize.UglifyJsPlugin({
-			output: {
-				comments: false
-			},
-            exclude: /wasm.entry.js/,
-			compress: {
-				unsafe_comps: true,
-				properties: true,
-				keep_fargs: false,
-				pure_getters: true,
-				collapse_vars: true,
-				unsafe: true,
-				warnings: false,
-				screw_ie8: true,
-				sequences: true,
-				dead_code: true,
-				drop_debugger: true,
-				comparisons: true,
-				conditionals: true,
-				evaluate: true,
-				booleans: true,
-				loops: true,
-				unused: true,
-				hoist_funs: true,
-				if_return: true,
-				join_vars: true,
-				cascade: true,
-				drop_console: true
-			}
-		}),
+		// new webpack.optimize.UglifyJsPlugin({
+		// 	output: {
+		// 		comments: false
+		// 	},
+        //     exclude: /\.wasm$/,
+		// 	compress: {
+		// 		unsafe_comps: true,
+		// 		properties: true,
+		// 		keep_fargs: false,
+		// 		pure_getters: true,
+		// 		collapse_vars: true,
+		// 		unsafe: true,
+		// 		warnings: false,
+		// 		screw_ie8: true,
+		// 		sequences: true,
+		// 		dead_code: true,
+		// 		drop_debugger: true,
+		// 		comparisons: true,
+		// 		conditionals: true,
+		// 		evaluate: true,
+		// 		booleans: true,
+		// 		loops: true,
+		// 		unused: true,
+		// 		hoist_funs: true,
+		// 		if_return: true,
+		// 		join_vars: true,
+		// 		cascade: true,
+		// 		drop_console: true
+		// 	}
+		// }),
 
 	] : []),
 
@@ -202,10 +204,8 @@ module.exports = {
         https: false,
 		openPage: '',
         before: app => {
-            app.get('/utils.wasm', (req, res) => {
+            app.get('/wasm/utils.wasm', (req, res) => {
                 const wasmFilePath = path.resolve(__dirname, './build/utils.wasm');
-
-                console.log(`Wasm request ${wasmFilePath}`);
 
                 fs.readFile(wasmFilePath, (err, data) => {
                     const errorMessage = `Error ${wasmFilePath} not found. ${JSON.stringify(err)}`;

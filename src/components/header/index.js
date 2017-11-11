@@ -7,7 +7,7 @@ export default class Header extends Component {
 		return (
 			<header class={style.header}>
 				<nav>
-					<Link activeClassName={style.active} href="/">WbDrummer</Link>
+					<Link activeClassName={style.active} href="/">WD</Link>
 				</nav>
 			</header>
 		);
